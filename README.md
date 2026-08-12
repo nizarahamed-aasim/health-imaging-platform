@@ -1,28 +1,13 @@
-# health-imaging-platform
+# /.github
 
-Multi-tenant medical imaging ingestion, de-identification, and cohort/research
-platform on AWS. See `/docs/architecture/` for design docs and ADRs.
+Repository governance and CI/CD configuration.
 
-## Repository layout
+**What goes here:**
+- `CODEOWNERS` — required reviewers per path
+- `PULL_REQUEST_TEMPLATE.md` — PR checklist (tests, secrets, docs, cdk-nag)
+- `workflows/` — GitHub Actions CI/CD pipelines (add as they're built:
+  lint/test on PR, cdk-nag checks, deploy pipelines per environment)
+- `ISSUE_TEMPLATE/` — bug report / feature request templates (add as needed)
 
-| Folder | Contents |
-|---|---|
-| `/infra` | AWS CDK stacks — DynamoDB, S3, OpenSearch, Step Functions, IAM, networking |
-| `/services` | Backend services — ingestion, validation, de-identification, consent, billing webhooks |
-| `/ui` | Frontend portal (patient/tenant-facing and internal ops views) |
-| `/shared` | Shared libraries — types, clients, utilities used across services and infra |
-| `/scripts` | One-off and operational scripts (data migrations, backfills, local dev setup) |
-| `/docs` | Architecture docs, ADRs, runbooks |
-| `/.github` | CI/CD workflows, PR template, CODEOWNERS |
-
-## Getting started
-
-1. Clone the repo and run `pre-commit install` (see `.pre-commit-config.yaml`).
-2. See `/docs/README.md` for links to architecture docs.
-3. See each folder's own `README.md` for folder-specific setup notes.
-
-## Contributing
-
-All changes go through a pull request — direct pushes to `main` are blocked.
-See `.github/PULL_REQUEST_TEMPLATE.md` for the PR checklist and `.github/CODEOWNERS`
-for who reviews what.
+Changes here affect how *every* PR in the repo is reviewed and gated, so this
+folder itself requires platform-lead review (see `CODEOWNERS`).

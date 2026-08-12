@@ -1,0 +1,38 @@
+# CODEOWNERS
+# Each line is a file/folder pattern followed by one or more owners.
+# Owners are automatically requested for review when a PR touches matching paths.
+# Order matters: later matching patterns take precedence over earlier ones.
+# Replace the placeholder GitHub handles/teams below with real usernames or
+# org teams (e.g. @health-imaging-platform/data-eng) before merging.
+
+# Default owners for anything not matched below
+*                           @health-imaging-platform/platform-leads
+
+# Infrastructure as Code (CDK stacks, IAM, networking)
+/infra/                     @health-imaging-platform/platform-eng
+
+# Backend services (ingestion, de-identification, cohort, billing webhooks)
+/services/                  @health-imaging-platform/backend-eng
+
+# Frontend / portal UI
+/ui/                        @health-imaging-platform/frontend-eng
+
+# Shared libraries used across services (types, utils, clients)
+/shared/                    @health-imaging-platform/backend-eng @health-imaging-platform/frontend-eng
+
+# Operational and dev scripts
+/scripts/                   @health-imaging-platform/platform-eng
+
+# Architecture docs and ADRs — require a lead review since these record
+# binding technical decisions
+/docs/architecture/         @health-imaging-platform/platform-leads
+
+# Anything touching consent, de-identification, or the pseudo-ID crosswalk
+# is high-sensitivity and requires security/compliance sign-off regardless
+# of which top-level folder it lives in
+**/consent/**               @health-imaging-platform/security-compliance
+**/deidentification/**      @health-imaging-platform/security-compliance
+**/pseudo-id/**             @health-imaging-platform/security-compliance
+
+# CI/CD workflows and repo governance files
+/.github/                   @health-imaging-platform/platform-leads
