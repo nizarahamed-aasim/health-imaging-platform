@@ -1,0 +1,64 @@
+# Pre-commit hook configuration.
+# Install with:
+#   pip install pre-commit --break-system-packages
+#   pre-commit install
+# Run against all files once after adding new hooks:
+#   pre-commit run --all-files
+
+repos:
+  # Python formatter
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+        language_version: python3
+
+  # Python import sorter (configured to be Black-compatible)
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
+  # Python security scanner (flags things like hardcoded passwords,
+  # SQL injection risk, use of eval, insecure deserialization, etc.)
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.9
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml"]
+        additional_dependencies: ["bandit[toml]"]
+
+  # Scans staged changes for accidentally committed secrets/credentials
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ["--baseline", ".secrets.baseline"]
+        exclude: package-lock.json|yarn.lock|pnpm-lock.yaml
+
+  # General hygiene hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=5000"]
+      - id: check-yaml
+      - id: check-json
+
+  # TypeScript/JS linting — runs the repo's local ESLint config so rules
+  # stay consistent with what CI enforces
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: npx eslint --fix
+        language: system
+        files: \.(ts|tsx|js|jsx)$
+        exclude: node_modules|cdk\.out
+
+default_language_version:
+  python: python3

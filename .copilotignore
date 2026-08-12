@@ -1,0 +1,22 @@
+# Prevents GitHub Copilot from reading/sending these files as context.
+# Critical for this repo since it handles PHI-adjacent medical imaging data —
+# nothing here should ever be sent to Copilot's backend as context.
+
+# Environment / secrets files
+*.env
+.env.*
+
+# Any secrets directory, anywhere in the tree
+**/secrets/**
+
+# Sample/test DICOM files that may contain real or realistic PHI
+**/test-data/*.dcm
+
+# Anything with "phi" in the filename, anywhere in the tree
+**/*phi*
+
+# Belt-and-suspenders: also exclude common credential file patterns
+**/*.pem
+**/*.key
+**/credentials.json
+**/*_rsa

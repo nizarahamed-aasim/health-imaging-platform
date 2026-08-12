@@ -1,0 +1,45 @@
+# Secrets / environment
+.env
+.env.*
+**/secrets/**
+*.key
+*.pem
+credentials.json
+
+# DICOM / imaging test data — never commit real or sample patient imaging data
+*.dcm
+**/test-data/*.dcm
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Node / TypeScript
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# CDK
+cdk.out/
+cdk.context.json
+.cdk.staging/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# detect-secrets baseline is intentionally tracked (not ignored) — it should
+# be committed so pre-commit can diff against it
